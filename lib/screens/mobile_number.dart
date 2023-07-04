@@ -144,18 +144,18 @@ class _MobileNumberState extends State<MobileNumber> {
                             (PhoneAuthCredential credential) {},
                         verificationFailed: (FirebaseAuthException e) {},
                         codeSent: (String verificationId, int? resendToken) {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              duration: const Duration(milliseconds: 300),
-                              alignment: Alignment.center,
-                              type: PageTransitionType.rightToLeft,
-                              child: VerifyPhone(
-                                phone: phone.text,
-                                id: verificationId,
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              PageTransition(
+                                duration: const Duration(milliseconds: 300),
+                                alignment: Alignment.center,
+                                type: PageTransitionType.rightToLeft,
+                                child: VerifyPhone(
+                                  phone: phone.text,
+                                  id: verificationId,
+                                ),
                               ),
-                            ),
-                          );
+                              (route) => false);
                         },
                         codeAutoRetrievalTimeout: (String verificationId) {},
                       );

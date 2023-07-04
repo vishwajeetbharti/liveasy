@@ -134,15 +134,15 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                             PhoneAuthProvider.credential(
                                 verificationId: widget.id, smsCode: code);
                         await auth.signInWithCredential(credential);
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            duration: const Duration(milliseconds: 300),
-                            alignment: Alignment.center,
-                            type: PageTransitionType.rightToLeft,
-                            child: const ProfileSelection(),
-                          ),
-                        );
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            PageTransition(
+                              duration: const Duration(milliseconds: 300),
+                              alignment: Alignment.center,
+                              type: PageTransitionType.rightToLeft,
+                              child: const ProfileSelection(),
+                            ),
+                            (route) => false);
                       } catch (e) {
                         print(e.toString());
                       }
